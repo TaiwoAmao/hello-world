@@ -5,18 +5,25 @@ version: 2.1
   # Declare a dependency on the welcome-orb
   #welcome: circleci/welcome-orb@0.4.1
 # Orchestrate or schedule a set of jobs
-commands:
-  print_pipeline_id:
-    description: "This command prints out the pipeline ID."
-    steps:
-      - run: echo ${CIRCLE_WORKFLOW_ID}
+#commands:
+#  print_pipeline_id:
+#    description: "This command prints out the pipeline ID."
+#    steps:
+#      - run: echo ${CIRCLE_WORKFLOW_ID}
       
 jobs:
   my_job:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - print_pipeline_id
+      - run: return 1
+      - run: 
+          name: on error
+          command: echo "Hello Error!"
+          when: on_fail    
+    
+    #steps:
+    #  - print_pipeline_id
   #save_hello_world_output:
   #  docker:
   #    - image: circleci/node:13.8.0
